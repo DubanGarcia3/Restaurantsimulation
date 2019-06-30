@@ -1,16 +1,35 @@
 package uptc.com.entities;
 
-public class Waiter {
+public class Waiter extends Thread {
 	
-	int id;
-	int timeToServe;
+	private int id;
+	public static int ID_BASE = 1;
+	private int timeToServe;
+	private boolean service;
 	
 	public Waiter(int id, int timeToServe) {
+		id = ID_BASE++;
 		this.id = id;
 		this.timeToServe = timeToServe;
 	}
+	
+	@Override
+	public void run() {
+		super.run();
+		try {
+			service = true;
+			while (service) {
+				System.out.println("El mesero está sirviendo");
+				Thread.sleep(timeToServe);
+				break;
+			}
+			service = false;	
+		} catch (InterruptedException e) {
+			System.out.println(e);
+		}
+	}
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 	public void setId(int id) {
@@ -23,5 +42,11 @@ public class Waiter {
 		this.timeToServe = timeToServe;
 	}
 
-	
+	public boolean isService() {
+		return service;
+	}
+
+	public void setService(boolean service) {
+		this.service = service;
+	}
 }

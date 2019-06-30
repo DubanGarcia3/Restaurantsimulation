@@ -12,6 +12,7 @@ public class Restaurant {
 	private List<Calification> califications = new ArrayList<>();
 	private List<String> listData = new ArrayList<String>();
 	private List<String> listDataClients = new ArrayList<String>();
+	private List<String> listTimes = new ArrayList<String>();
 
 	private static Restaurant restaurant = new Restaurant();
 
@@ -104,11 +105,6 @@ public class Restaurant {
 			Table table4 = new Table("Mesa 4 ");
 			Table table5 = new Table("Mesa 5 ");
 
-			table1.setWaitTime((100));
-			table2.setWaitTime((100));
-			table3.setWaitTime((100));
-			table4.setWaitTime((100));
-			table5.setWaitTime((100));
 			table1.start();
 			table2.start();
 			table3.start();
@@ -143,6 +139,11 @@ public class Restaurant {
 			List<String> fileTwo = FileManager.readFileClients();
 			for (int i = 0; i < fileTwo.size(); i++) {
 				listDataClients.add(createClient(FileManager.splitLine(fileTwo.get(i), ",")));
+			}
+			
+			List<String> fileThree = FileManager.readFileClients();
+			for (int i = 0; i < fileThree.size(); i++) {
+				listTimes.add(createClient(FileManager.splitLine(fileThree.get(i), ",")));
 			}
 			
 		} catch (IOException e) {
@@ -197,5 +198,37 @@ public class Restaurant {
 
 	public void setConsumptions(List<Calification> califications) {
 		this.califications = califications;
+	}
+
+	public List<Plate> getListOfPlates() {
+		return listOfPlates;
+	}
+
+	public void setListOfPlates(List<Plate> listOfPlates) {
+		this.listOfPlates = listOfPlates;
+	}
+
+	public List<String> getListData() {
+		return listData;
+	}
+
+	public void setListData(List<String> listData) {
+		this.listData = listData;
+	}
+
+	public List<String> getListDataClients() {
+		return listDataClients;
+	}
+
+	public void setListDataClients(List<String> listDataClients) {
+		this.listDataClients = listDataClients;
+	}
+
+	public List<String> getListTimes() {
+		return listTimes;
+	}
+
+	public void setListTimes(List<String> listTimes) {
+		this.listTimes = listTimes;
 	}
 }

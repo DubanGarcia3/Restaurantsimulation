@@ -19,6 +19,12 @@ public class FileManager {
 		return listLines;		
 	}
 	
+	public static List<String> readFileTimeToEat() throws IOException{
+		List<String> listLines;
+		listLines = Files.readAllLines(Paths.get("src/data/tiemposComida.csv"));
+		return listLines;		
+	}
+	
 	public static String[] splitLine(String line, String separator){
 		return line.split(separator);
 	}
