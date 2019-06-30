@@ -3,23 +3,15 @@ package uptc.com.entities;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import model.LinearCongruency;
-import model.Pruebas;
-import model.UniformDistribution;
 import persistence.FileManager;
 
 public class Restaurant {
-
-	public static final int MIN_CONSUMERS_PER_DAY = 200;
-	public static final int MAX_CONSUMERS_PER_DAY = 300;
-	public static final int MIN_HOURS_PER_DAY = 10;
-	public static final int MAX_HOURS_PER_DAY = 12;
 
 	private List<Day> daysToSimulate;
 	private List<Plate> listOfPlates;
 	private List<Calification> consumptions = new ArrayList<>();
 	private List<String> listData = new ArrayList<String>();
+	private List<String> listDataClients = new ArrayList<String>();
 
 	private static Restaurant restaurant = new Restaurant();
 
@@ -131,7 +123,7 @@ public class Restaurant {
 		int auxHours = 0;
 		int auxDay = 1;
 		List<Double> hours = generateHours();
-		List<Double> totalOfConsumers = generateUniformDistribution(11, 2, 7, 32, 100, MIN_CONSUMERS_PER_DAY, MAX_CONSUMERS_PER_DAY);
+		List<Double> totalOfConsumers = generateClients();
 		for (int i = 0; i < totalOfConsumers.size(); i++) {
 			System.out.println(totalOfConsumers.get(i).toString());
 		}
@@ -148,6 +140,12 @@ public class Restaurant {
 			for (int i = 0; i < file.size(); i++) {
 				listData.add(createHour(FileManager.splitLine(file.get(i), ",")));
 			}
+			
+			List<String> fileTwo = FileManager.readFileClients();
+			for (int i = 0; i < fileTwo.size(); i++) {
+				listDataClients.add(createClient(FileManager.splitLine(fileTwo.get(i), ",")));
+			}
+			
 		} catch (IOException e) {
 			System.out.println(e);
 		}
@@ -165,15 +163,17 @@ public class Restaurant {
 		return hours;
 	}
 	
-	private ArrayList<Double> generateUniformDistribution(double x0, int k, int c, int g, int quantity, int min, int max) {		
-		ArrayList<Double> pseudoNumbers = LinearCongruency.generateNumbers(x0, k, c, g, quantity);
-		ArrayList<Double> hours = UniformDistribution.generateDistribution(pseudoNumbers, min, max);
-		while (!(Pruebas.pruebaMedias(0.95, pseudoNumbers) && Pruebas.pruebaVarianza(pseudoNumbers) && Pruebas.pruebaKS(pseudoNumbers))) {
-			pseudoNumbers = LinearCongruency.generateNumbers(x0, k, c, g, quantity);
-			hours = UniformDistribution.generateDistribution(pseudoNumbers, min, max);
-		}
 
-		return hours;
+	public String createClient(String []in) {
+		return (in[0]);
+	}
+	
+	private ArrayList<Double> generateClients() {		
+		ArrayList<Double> clients = new ArrayList<Double>();
+		for (int i = 0; i < listDataClients.size(); i++) {
+			clients.add(Double.parseDouble(listDataClients.get(i)));
+		}
+		return clients;
 	}
 
 	public List<Day> getDays() {
