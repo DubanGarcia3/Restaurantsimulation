@@ -110,7 +110,6 @@ public class Restaurant {
 			table3 = new Table(0, "Mesa 3 ", (int) Math.ceil(day.getTotalConsumers() / 2));
 			table4 = new Table(0, "Mesa 4 ", (int) Math.ceil(day.getTotalConsumers() / 2));
 			table5 = new Table(0, "Mesa 5 ", (int) Math.ceil(day.getTotalConsumers() / 2));
-			
 
 			timeForConsumer = (day.getTotalConsumers() / 2) / day.getWorkingHours();
 			table1.setWaitTime((1000));

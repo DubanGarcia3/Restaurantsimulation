@@ -29,6 +29,7 @@ public class Table extends Thread {
             	Waiter waiter = new Waiter(1, 2);
             	this.addToTable();
             	this.startEat();
+            	this.remove();
                 consumption.setProduct(Restaurant.getInstance().getPlates().get((int) (Math.random() *(4 -  0) + 0)));
                 Thread.sleep(waitTime);
                 if (consumption.getProduct().getRatingProbability() > Math.random()) {
@@ -42,7 +43,6 @@ public class Table extends Thread {
                     		"Plato : " + consumption.getProduct().getProductName() + 
                     		"Calificó con: " + consumption.getScore());
                 }
-                this.remove();
                 isOccuppied = false;
                 Restaurant.getInstance().addConsumation(consumption);
             }
@@ -55,15 +55,14 @@ public class Table extends Thread {
 	public void addToTable() {
 		for (int i = 0; i < (int)(Math.random()*4); i++) {
 			listClients.add(new Client((int)Math.random()*10));
-			
 		}
-		
 		System.out.println(listClients.size());
 	}
 	
 	public void startEat() {
 		for (int i = 0; i < listClients.size(); i++) {
 			listClients.get(i).start();
+			System.out.println(listClients.get(i).toString());
 		}
 	}
 	
