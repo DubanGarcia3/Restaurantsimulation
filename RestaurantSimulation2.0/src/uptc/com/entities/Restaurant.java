@@ -93,6 +93,9 @@ public class Restaurant {
 	private void startSimulation() {
 		ManagerRestaurant table1 = null;
 		ManagerRestaurant table2 = null;
+		ManagerRestaurant table3 = null;
+		ManagerRestaurant table4 = null;
+		ManagerRestaurant table5 = null;
 		int timeForConsumer = 0;
 		System.out.println("Dias-->" + daysToSimulate.size());
 		System.out.println();
@@ -102,14 +105,24 @@ public class Restaurant {
 			System.out.println("horas" + day.getWorkingHours());
 			System.out.println("clientes" + day.getTotalConsumers());
 			table1 = new ManagerRestaurant(0, "Mesa 1 ", day.getTotalConsumers() / 2);
+			System.out.println("customesrs: "+day.getTotalConsumers());
 			table2 = new ManagerRestaurant(0, "Mesa 2 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			table3 = new ManagerRestaurant(0, "Mesa 3 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			table4 = new ManagerRestaurant(0, "Mesa 4 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			table5 = new ManagerRestaurant(0, "Mesa 5 ", (int) Math.ceil(day.getTotalConsumers() / 2));
 
 			timeForConsumer = (day.getTotalConsumers() / 2) / day.getWorkingHours();
 			table1.setWaitTime((1000));
 			table2.setWaitTime((1000));
+			table3.setWaitTime((1000));
+			table4.setWaitTime((1000));
+			table5.setWaitTime((1000));
 			table1.start();
 			table2.start();
-			while (table1.isAlive() || table2.isAlive()) {
+			table3.start();
+			table4.start();
+			table5.start();
+			while (table1.isAlive() || table2.isAlive() || table5.isAlive() || table4.isAlive() || table3.isAlive()) {
 			}
 			System.out.println("Fin dia" + day.getId() );
 		}
