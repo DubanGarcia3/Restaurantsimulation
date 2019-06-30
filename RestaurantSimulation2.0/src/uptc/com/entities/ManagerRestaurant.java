@@ -22,7 +22,7 @@ public class ManagerRestaurant extends Thread {
         try {
             isOccuppied = true;
             for (int i = 0; i < totalOfConsumersOnTable; i++) {
-                Comsumo consumption = new Comsumo();
+            	Calification consumption = new Calification();
                 consumption.setProduct(Restaurant.getInstance().getPlates().get((int) (Math.random() *(4 -  0) + 0)));
                 Thread.sleep(waitTime);
                 if (consumption.getProduct().getRatingProbability() > Math.random()) {

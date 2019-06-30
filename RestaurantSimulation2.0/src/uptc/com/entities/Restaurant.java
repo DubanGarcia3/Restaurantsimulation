@@ -3,14 +3,11 @@ package uptc.com.entities;
 import java.util.ArrayList;
 import java.util.List;
 
-import uptc.com.entities.LinearCongruency;
-import uptc.com.entities.Pruebas;
-import uptc.com.entities.UniformDistribution;
 
 public class Restaurant {
 
-	public static final int MIN_CONSUMERS_PER_DAY = 73;
-	public static final int MAX_CONSUMERS_PER_DAY = 103;
+	public static final int MIN_CONSUMERS_PER_DAY = 200;
+	public static final int MAX_CONSUMERS_PER_DAY = 300;
 	public static final int MIN_HOURS_PER_DAY = 10;
 	public static final int MAX_HOURS_PER_DAY = 12;
 
@@ -134,13 +131,12 @@ public class Restaurant {
 	}
 
 	private ArrayList<Double> generateUniformDistribution(double x0, int k, int c, int g, int quantity, int min, int max) {		
-		ArrayList<Double> pseudoNumbers = LinearCongruency.generateNumbers(x0, k, c, g, quantity);
-		ArrayList<Double> hours = UniformDistribution.generateDistribution(pseudoNumbers, min, max);
-		while (!(Pruebas.pruebaMedias(0.95, pseudoNumbers) && Pruebas.pruebaVarianza(pseudoNumbers) && Pruebas.pruebaKS(pseudoNumbers))) {
-			pseudoNumbers = LinearCongruency.generateNumbers(x0, k, c, g, quantity);
-			hours = UniformDistribution.generateDistribution(pseudoNumbers, min, max);
+		ArrayList<Double> pseudoNumbers = model.LinearCongruency.generateNumbers(x0, k, c, g, quantity);
+		ArrayList<Double> hours = model.UniformDistribution.generateDistribution(pseudoNumbers, min, max);
+		while (!(model.Pruebas.pruebaMedias(0.95, pseudoNumbers) && model.Pruebas.pruebaVarianza(pseudoNumbers) && model.Pruebas.pruebaKS(pseudoNumbers))) {
+			pseudoNumbers = model.LinearCongruency.generateNumbers(x0, k, c, g, quantity);
+			hours = model.UniformDistribution.generateDistribution(pseudoNumbers, min, max);
 		}
-
 		return hours;
 	}
 

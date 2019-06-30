@@ -1,15 +1,15 @@
 package uptc.com.entities;
 
-public class Comsumo {
+public class Calification {
 
     private int idConsumption;
     private int score;
     private Product product;
 
-    public Comsumo() {
+    public Calification() {
     }
 
-    public Comsumo(int id, int score, Product product) {
+    public Calification(int id, int score, Product product) {
         this.idConsumption = id;
         this.score = score;
         this.product = product;
