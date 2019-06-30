@@ -105,8 +105,8 @@ public class Restaurant {
 			table2 = new ManagerRestaurant(0, "Mesa 2 ", (int) Math.ceil(day.getTotalConsumers() / 2));
 
 			timeForConsumer = (day.getTotalConsumers() / 2) / day.getWorkingHours();
-			table1.setWaitTime((timeForConsumer * 10));
-			table2.setWaitTime((timeForConsumer * 10));
+			table1.setWaitTime((1000));
+			table2.setWaitTime((1000));
 			table1.start();
 			table2.start();
 			while (table1.isAlive() || table2.isAlive()) {
@@ -115,8 +115,6 @@ public class Restaurant {
 		}
 		generateFinalReport();
 	}
-
-	
 
 	private void generateDays(int hoursToSimulate) {
 		daysToSimulate = new ArrayList<>();
