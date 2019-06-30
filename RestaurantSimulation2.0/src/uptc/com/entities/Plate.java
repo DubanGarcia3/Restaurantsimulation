@@ -1,11 +1,11 @@
 package uptc.com.entities;
 
-public class Product {
+public class Plate {
     private int idProduct;
     private String productName;
     private double ratingProbability;
 
-    public Product(int id, String name, double ratingProbability) {
+    public Plate(int id, String name, double ratingProbability) {
         this.idProduct = id;
         this.productName = name;
         this.ratingProbability = ratingProbability;

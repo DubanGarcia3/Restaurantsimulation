@@ -15,7 +15,7 @@ public class Restaurant {
 	public static final int MAX_HOURS_DAY = 12;
 
 	private List<Day> daysToSimulate;
-	private List<Product> listOfPlates;
+	private List<Plate> listPlates;
 	private List<Calification> calificationList = new ArrayList<>();
 	private List<String> listData = new ArrayList<String>();
 
@@ -88,11 +88,11 @@ public class Restaurant {
 	}
 
 	private void addPlates() {
-		listOfPlates = new ArrayList<>();
-		listOfPlates.add(new Product(0, "Bandeja Paisa", Math.random()));
-		listOfPlates.add(new Product(2, "Paella a la Valenciana", Math.random()));
-		listOfPlates.add(new Product(3, "Arroz con Pollo", Math.random()));
-		listOfPlates.add(new Product(1, "Cuchuco de Trigo con Espinazo", Math.random()));
+		listPlates = new ArrayList<>();
+		listPlates.add(new Plate(0, "Bandeja Paisa", Math.random()));
+		listPlates.add(new Plate(2, "Paella a la Valenciana", Math.random()));
+		listPlates.add(new Plate(3, "Arroz con Pollo", Math.random()));
+		listPlates.add(new Plate(1, "Cuchuco de Trigo con Espinazo", Math.random()));
 	}
 
 	private void startSimulation() {
@@ -175,12 +175,12 @@ public class Restaurant {
 		this.daysToSimulate = days;
 	}
 
-	public List<Product> getPlates() {
-		return listOfPlates;
+	public List<Plate> getPlates() {
+		return listPlates;
 	}
 
-	public void setPlates(List<Product> plates) {
-		this.listOfPlates = plates;
+	public void setPlates(List<Plate> plates) {
+		this.listPlates = plates;
 	}
 
 	public List<Calification> getConsumptions() {

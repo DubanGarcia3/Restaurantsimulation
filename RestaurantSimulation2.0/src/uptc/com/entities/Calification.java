@@ -4,12 +4,12 @@ public class Calification {
 
     private int id;
     private int score;
-    private Product product;
+    private Plate product;
 
     public Calification() {
     }
 
-    public Calification(int id, int score, Product product) {
+    public Calification(int id, int score, Plate product) {
         this.id = id;
         this.score = score;
         this.product = product;
@@ -31,11 +31,11 @@ public class Calification {
 		this.score = score;
 	}
 
-	public Product getProduct() {
+	public Plate getProduct() {
 		return product;
 	}
 
-	public void setProduct(Product product) {
+	public void setProduct(Plate product) {
 		this.product = product;
 	}
 
