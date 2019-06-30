@@ -98,11 +98,11 @@ public class Restaurant {
 			System.out.println("Dia #: " + day.getId() + "");
 			System.out.println("Horas trabajadas" + day.getWorkingHours());
 			System.out.println("Clientes en el dia: " + day.getTotalConsumers());
-			Table table1 = new Table("Mesa 1 ", day.getTotalConsumers() / 2);
-			Table table2 = new Table("Mesa 2 ", (int) Math.ceil(day.getTotalConsumers() / 2));
-			Table table3 = new Table("Mesa 3 ", (int) Math.ceil(day.getTotalConsumers() / 2));
-			Table table4 = new Table("Mesa 4 ", (int) Math.ceil(day.getTotalConsumers() / 2));
-			Table table5 = new Table("Mesa 5 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			Table table1 = new Table("Mesa 1 ");
+			Table table2 = new Table("Mesa 2 ");
+			Table table3 = new Table("Mesa 3 ");
+			Table table4 = new Table("Mesa 4 ");
+			Table table5 = new Table("Mesa 5 ");
 
 			table1.setWaitTime((100));
 			table2.setWaitTime((100));

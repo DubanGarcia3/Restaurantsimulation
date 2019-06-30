@@ -9,14 +9,12 @@ public class Table extends Thread {
 	private String tableName;
 	private int waitTime;
 	private boolean freeTable;
-	private int clientsEating;
 	private ArrayList<Client> listClients;
 
-	public Table(String nombre, int clientsEating) {
+	public Table(String nombre) {
 		this.idTable = ID_BASE++;
 		this.tableName = nombre;
 		this.freeTable = false;
-		this.clientsEating = clientsEating;
 		this.listClients = new ArrayList<Client>();
 	}
 
@@ -25,20 +23,20 @@ public class Table extends Thread {
 		super.run();
 		try {
 			freeTable = true;
-			for (int i = 0; i < clientsEating; i++) {
-				Calification consumption = new Calification();
+			for (int i = 0; i < 30; i++) {
+				Calification calification = new Calification();
 				Waiter waiter = new Waiter(1, 2);
 				this.addToTable();
 				this.startEat();
 				listClients.removeAll(listClients);
-				consumption.setPlate(Restaurant.getInstance().getPlates().get((int) (Math.random() *(4 -  0) + 0)));
+				calification.setPlate(Restaurant.getInstance().getPlates().get((int) (Math.random() *(4 -  0) + 0)));
 				Thread.sleep(waitTime);
-				consumption.setScore((int) (Math.random() * (5 - 0) + 1) + 0);
+				calification.setScore((int) (Math.random() * (5 - 0) + 1) + 0);
 				System.out.println("Carta " + tableName +  
-						"Plato : " + consumption.getPlate().getProductName() + 
-						"Calificó con: " + consumption.getScore());
+						"Plato : " + calification.getPlate().getProductName() + 
+						"Calificó con: " + calification.getScore());
 				freeTable = false;
-				Restaurant.getInstance().addCalification(consumption);
+				Restaurant.getInstance().addCalification(calification);
 			}
 
 		} catch (InterruptedException e) {
@@ -49,6 +47,7 @@ public class Table extends Thread {
 	public void addToTable() {
 		for (int i = 0; i < (int)(Math.random()*3 + 1); i++) {
 			listClients.add(new Client((int)Math.random()*10));
+			System.out.println("Esto esta mal"+(int)(Math.random()*10 )+ 1);
 		}
 		System.out.println("Mesa # "+idTable+" Cantidad de clientes en la mesa: "+ listClients.size());
 	}
@@ -71,34 +70,35 @@ public class Table extends Thread {
 	public int getIdTable() {
 		return idTable;
 	}
+	
 	public void setIdTable(int idTable) {
 		this.idTable = idTable;
 	}
+	
 	public String getTableName() {
 		return tableName;
 	}
+	
 	public void setTableName(String tableName) {
 		this.tableName = tableName;
 	}
+	
 	public int getWaitTime() {
 		return waitTime;
 	}
+	
 	public void setWaitTime(int waitTime) {
 		this.waitTime = waitTime;
 	}
+	
 	public boolean isOccuppied() {
 		return freeTable;
 	}
+	
 	public void setOccuppied(boolean isOccuppied) {
 		this.freeTable = isOccuppied;
 	}
-	public int getTotalOfConsumersOnTable() {
-		return clientsEating;
-	}
-	public void setTotalOfConsumersOnTable(int totalOfConsumersOnTable) {
-		this.clientsEating = totalOfConsumersOnTable;
-	}
-
+	
 	public ArrayList<Client> getListClients() {
 		return listClients;
 	}
