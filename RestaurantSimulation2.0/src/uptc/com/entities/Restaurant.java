@@ -106,10 +106,28 @@ public class Restaurant {
 			System.out.println("clientes" + day.getTotalConsumers());
 			table1 = new Table(0, "Mesa 1 ", day.getTotalConsumers() / 2);
 			System.out.println("customesrs: "+day.getTotalConsumers());
+			table1.addToTable();
+			for (int i = 0; i < table1.getListClients().size(); i++) {
+				table1.getListClients().get(i).start();
+			}
+			table1.remove();
 			table2 = new Table(0, "Mesa 2 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			table2.addToTable();
+			for (int i = 0; i < table2.getListClients().size(); i++) {
+				table2.getListClients().get(i).start();
+			}
 			table3 = new Table(0, "Mesa 3 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			table3.addToTable();
+			for (int i = 0; i < table3.getListClients().size(); i++) {
+				table3.getListClients().get(i).start();
+			}
 			table4 = new Table(0, "Mesa 4 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			table4.addToTable();
+			for (int i = 0; i < table4.getListClients().size(); i++) {
+				table4.getListClients().get(i).start();
+			}
 			table5 = new Table(0, "Mesa 5 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			table5.addToTable();
 
 			timeForConsumer = (day.getTotalConsumers() / 2) / day.getWorkingHours();
 			table1.setWaitTime((1000));
@@ -135,9 +153,6 @@ public class Restaurant {
 		int auxDay = 1;
 		List<Double> hours = generateHours();
 		List<Double> totalOfConsumers = generateClients();
-		for (int i = 0; i < totalOfConsumers.size(); i++) {
-			System.out.println(totalOfConsumers.get(i).toString());
-		}
 		while (auxHours < hoursToSimulate) {
 			daysToSimulate.add(new Day(auxDay, (int) (Math.round(hours.get(auxDay))), (int) (Math.round(totalOfConsumers.get(auxDay)))));
 			auxHours += (int) (Math.round(hours.get(auxDay)));

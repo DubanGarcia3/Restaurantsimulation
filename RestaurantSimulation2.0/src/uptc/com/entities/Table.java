@@ -9,12 +9,14 @@ public class Table extends Thread {
     private int waitTime;
     private boolean isOccuppied;
     private int totalOfConsumersOnTable;
+    private ArrayList<Client> listClients;
 
     public Table(int id, String nombre, int totalOfConsumersOnTable) {
         this.idTable = id;
         this.tableName = nombre;
         isOccuppied = false;
         this.totalOfConsumersOnTable = totalOfConsumersOnTable;
+        listClients = new ArrayList<Client>();
     }
    
 	@Override
@@ -45,6 +47,22 @@ public class Table extends Thread {
             e.printStackTrace();
         }
     }
+	
+	public void addToTable() {
+		for (int i = 0; i < (int)(Math.random()*4); i++) {
+			listClients.add(new Client((int)Math.random()*10));
+		}
+		System.out.println(listClients.size());
+	}
+	
+	public void remove() {
+		for (int i = 0; i < listClients.size(); i++) { 
+			if (listClients.get(i).isEating() == false) {
+				listClients.remove(i);
+			}
+		}
+	}
+	
 	public int getIdTable() {
 		return idTable;
 	}
@@ -74,5 +92,15 @@ public class Table extends Thread {
 	}
 	public void setTotalOfConsumersOnTable(int totalOfConsumersOnTable) {
 		this.totalOfConsumersOnTable = totalOfConsumersOnTable;
+	}
+
+	public ArrayList<Client> getListClients() {
+		return listClients;
+	}
+
+	public void setListClients(ArrayList<Client> listClients) {
+		this.listClients = listClients;
 	}	
+	
+	
 }
