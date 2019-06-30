@@ -12,7 +12,7 @@ public class Table extends Thread {
 	private int clientsEating;
 	private ArrayList<Client> listClients;
 
-	public Table(int id, String nombre, int clientsEating) {
+	public Table(String nombre, int clientsEating) {
 		this.idTable = ID_BASE++;
 		this.tableName = nombre;
 		this.freeTable = false;

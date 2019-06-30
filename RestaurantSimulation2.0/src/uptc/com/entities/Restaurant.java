@@ -91,31 +91,31 @@ public class Restaurant {
 	}
 
 	private void startSimulation() {
-		System.out.println("Total dias de trabajo simulados: " + daysToSimulate.size());
+		System.out.println("Dias simulados: " + daysToSimulate.size());
 		System.out.println();
 
 		for (Day day : daysToSimulate) {
-			System.out.println("Inicio Dia " + day.getId() + "");
-			System.out.println("horas" + day.getWorkingHours());
-			System.out.println("clientes" + day.getTotalConsumers());
-			Table	table1 = new Table(0, "Mesa 1 ", day.getTotalConsumers() / 2);
-			System.out.println("customesrs: "+day.getTotalConsumers());
-			Table	table2 = new Table(0, "Mesa 2 ", (int) Math.ceil(day.getTotalConsumers() / 2));
-			Table	table3 = new Table(0, "Mesa 3 ", (int) Math.ceil(day.getTotalConsumers() / 2));
-			Table	table4 = new Table(0, "Mesa 4 ", (int) Math.ceil(day.getTotalConsumers() / 2));
-			Table	table5 = new Table(0, "Mesa 5 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			System.out.println("Dia #: " + day.getId() + "");
+			System.out.println("Horas trabajadas" + day.getWorkingHours());
+			System.out.println("Clientes en el dia: " + day.getTotalConsumers());
+			Table table1 = new Table("Mesa 1 ", day.getTotalConsumers() / 2);
+			Table table2 = new Table("Mesa 2 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			Table table3 = new Table("Mesa 3 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			Table table4 = new Table("Mesa 4 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			Table table5 = new Table("Mesa 5 ", (int) Math.ceil(day.getTotalConsumers() / 2));
 
-			table1.setWaitTime((1000));
-			table2.setWaitTime((1000));
-			table3.setWaitTime((1000));
-			table4.setWaitTime((1000));
-			table5.setWaitTime((1000));
+			table1.setWaitTime((100));
+			table2.setWaitTime((100));
+			table3.setWaitTime((100));
+			table4.setWaitTime((100));
+			table5.setWaitTime((100));
 			table1.start();
 			table2.start();
 			table3.start();
 			table4.start();
 			table5.start();
-			System.out.println("Fin dia" + day.getId() );
+			while (table1.isAlive() || table2.isAlive() || table5.isAlive() || table4.isAlive() || table3.isAlive()) {
+			}
 		}
 		generateFinalReport();
 	}
