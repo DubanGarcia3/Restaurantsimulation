@@ -11,8 +11,8 @@ import persistence.FileManager;
 
 public class Restaurant {
 
-	public static final int MIN_CONSUMERS_PER_DAY = 73;
-	public static final int MAX_CONSUMERS_PER_DAY = 103;
+	public static final int MIN_CONSUMERS_PER_DAY = 200;
+	public static final int MAX_CONSUMERS_PER_DAY = 300;
 	public static final int MIN_HOURS_PER_DAY = 10;
 	public static final int MAX_HOURS_PER_DAY = 12;
 
@@ -31,10 +31,11 @@ public class Restaurant {
 	}
 
 	public void start(int hoursToSimulate) {
+		manageFile();
 		addPlates();
 		generateDays(hoursToSimulate);
-		System.out.println("Acabó");
 		startSimulation();
+		
 	}
 
 	private void generateFinalReport() {
@@ -129,8 +130,11 @@ public class Restaurant {
 		daysToSimulate = new ArrayList<>();
 		int auxHours = 0;
 		int auxDay = 1;
-		List<Double> hours = generateUniformDistribution(11, 2, 7, 24, 100, MIN_HOURS_PER_DAY, MAX_HOURS_PER_DAY);
+		List<Double> hours = generateHours();
 		List<Double> totalOfConsumers = generateUniformDistribution(11, 2, 7, 32, 100, MIN_CONSUMERS_PER_DAY, MAX_CONSUMERS_PER_DAY);
+		for (int i = 0; i < totalOfConsumers.size(); i++) {
+			System.out.println(totalOfConsumers.get(i).toString());
+		}
 		while (auxHours < hoursToSimulate) {
 			daysToSimulate.add(new Day(auxDay, (int) (Math.round(hours.get(auxDay))), (int) (Math.round(totalOfConsumers.get(auxDay)))));
 			auxHours += (int) (Math.round(hours.get(auxDay)));
@@ -153,24 +157,24 @@ public class Restaurant {
 		return (in[0]);
 	}
 	
-	private ArrayList<Double> generateUniformDistribution(double x0, int k, int c, int g, int quantity, int min, int max) {		
+	private ArrayList<Double> generateHours() {		
 		ArrayList<Double> hours = new ArrayList<Double>();
 		for (int i = 0; i < listData.size(); i++) {
 			hours.add(Double.parseDouble(listData.get(i)));
 		}
 		return hours;
 	}
+	
+	private ArrayList<Double> generateUniformDistribution(double x0, int k, int c, int g, int quantity, int min, int max) {		
+		ArrayList<Double> pseudoNumbers = LinearCongruency.generateNumbers(x0, k, c, g, quantity);
+		ArrayList<Double> hours = UniformDistribution.generateDistribution(pseudoNumbers, min, max);
+		while (!(Pruebas.pruebaMedias(0.95, pseudoNumbers) && Pruebas.pruebaVarianza(pseudoNumbers) && Pruebas.pruebaKS(pseudoNumbers))) {
+			pseudoNumbers = LinearCongruency.generateNumbers(x0, k, c, g, quantity);
+			hours = UniformDistribution.generateDistribution(pseudoNumbers, min, max);
+		}
 
-//	private ArrayList<Double> generateUniformDistribution(double x0, int k, int c, int g, int quantity, int min, int max) {		
-//		ArrayList<Double> pseudoNumbers = LinearCongruency.generateNumbers(x0, k, c, g, quantity);
-//		ArrayList<Double> hours = UniformDistribution.generateDistribution(pseudoNumbers, min, max);
-//		while (!(Pruebas.pruebaMedias(0.95, pseudoNumbers) && Pruebas.pruebaVarianza(pseudoNumbers) && Pruebas.pruebaKS(pseudoNumbers))) {
-//			pseudoNumbers = LinearCongruency.generateNumbers(x0, k, c, g, quantity);
-//			hours = UniformDistribution.generateDistribution(pseudoNumbers, min, max);
-//		}
-//
-//		return hours;
-//	}
+		return hours;
+	}
 
 	public List<Day> getDays() {
 		return daysToSimulate;
