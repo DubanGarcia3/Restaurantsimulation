@@ -1,6 +1,8 @@
 package uptc.com.entities;
 
-public class ManagerRestaurant extends Thread {
+import java.util.ArrayList;
+
+public class Table extends Thread {
 
     private int idTable;
     private String tableName;
@@ -8,7 +10,7 @@ public class ManagerRestaurant extends Thread {
     private boolean isOccuppied;
     private int totalOfConsumersOnTable;
 
-    public ManagerRestaurant(int id, String nombre, int totalOfConsumersOnTable) {
+    public Table(int id, String nombre, int totalOfConsumersOnTable) {
         this.idTable = id;
         this.tableName = nombre;
         isOccuppied = false;
@@ -23,6 +25,7 @@ public class ManagerRestaurant extends Thread {
             isOccuppied = true;
             for (int i = 0; i < totalOfConsumersOnTable; i++) {
             	Calification consumption = new Calification();
+            	Waiter waiter = new Waiter(1, 2);
                 consumption.setProduct(Restaurant.getInstance().getPlates().get((int) (Math.random() *(4 -  0) + 0)));
                 Thread.sleep(waitTime);
                 if (consumption.getProduct().getRatingProbability() > Math.random()) {
@@ -72,7 +75,5 @@ public class ManagerRestaurant extends Thread {
 	}
 	public void setTotalOfConsumersOnTable(int totalOfConsumersOnTable) {
 		this.totalOfConsumersOnTable = totalOfConsumersOnTable;
-	}
-	
-	
+	}	
 }
