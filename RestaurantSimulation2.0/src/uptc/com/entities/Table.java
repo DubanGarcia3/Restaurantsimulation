@@ -17,7 +17,6 @@ public class Table extends Thread {
         this.totalOfConsumersOnTable = totalOfConsumersOnTable;
     }
    
-	
 	@Override
     public void run() {
         super.run();
