@@ -6,14 +6,14 @@ import java.util.List;
 
 public class Restaurant {
 
-	public static final int MIN_CONSUMERS_PER_DAY = 200;
-	public static final int MAX_CONSUMERS_PER_DAY = 300;
-	public static final int MIN_HOURS_PER_DAY = 10;
-	public static final int MAX_HOURS_PER_DAY = 12;
+	public static final int MIN_CLIENTS_DAY = 200;
+	public static final int MAX_CLIENTS_DAY = 300;
+	public static final int MIN_HOURS_DAY = 10;
+	public static final int MAX_HOURS_DAY = 12;
 
-	private List<JobDay> daysToSimulate;
+	private List<Day> daysToSimulate;
 	private List<Product> listOfPlates;
-	private List<Comsumo> consumptions = new ArrayList<>();
+	private List<Calification> calificationList = new ArrayList<>();
 
 	private static Restaurant restaurant = new Restaurant();
 
@@ -37,7 +37,7 @@ public class Restaurant {
 		double sumOfRatingsPlate1 = 0, sumOfRatingsPlate2 = 0, sumOfRatingPlate3 = 0, sumOfRatingPlate4 = 0;
 		int totalNumberOfRatingsPlate1 = 0, totalNumberOfRatingsPlate2 = 0, totalNumberOfRatingsPlate3 = 0,
 				totalNumberOfRatingsPlate4 = 0;
-		for (Comsumo consumption : consumptions) {
+		for (Calification consumption : calificationList) {
 			try {
 			switch (consumption.getProduct().getIdProduct()) {
 			case 0:
@@ -79,8 +79,8 @@ public class Restaurant {
 		System.out.println("Cuchuco de Trigo con Espinazo : " + totalPlate2 + "\t Calificación: " + sumOfRatingsPlate2 / totalNumberOfRatingsPlate2);
 	}
 	
-	public void addConsumation(Comsumo consumption) {
-		consumptions.add(consumption);
+	public void addConsumation(Calification consumption) {
+		calificationList.add(consumption);
 	}
 
 	private void addPlates() {
@@ -98,14 +98,14 @@ public class Restaurant {
 		System.out.println("Dias-->" + daysToSimulate.size());
 		System.out.println();
 
-		for (JobDay day : daysToSimulate) {
+		for (Day day : daysToSimulate) {
 			System.out.println("Inicio Dia " + day.getId() + "");
-			System.out.println("horas" + day.getWorkingHours());
-			System.out.println("clientes" + day.getTotalConsumers());
-			table1 = new ManagerRestaurant(0, "Mesa 1 ", day.getTotalConsumers() / 2);
-			table2 = new ManagerRestaurant(0, "Mesa 2 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			System.out.println("horas" + day.getJobHours());
+			System.out.println("clientes" + day.getClients());
+			table1 = new ManagerRestaurant(0, "Mesa 1 ", day.getClients() / 2);
+			table2 = new ManagerRestaurant(0, "Mesa 2 ", (int) Math.ceil(day.getClients() / 2));
 
-			timeForConsumer = (day.getTotalConsumers() / 2) / day.getWorkingHours();
+			timeForConsumer = (day.getClients() / 2) / day.getJobHours();
 			table1.setWaitTime((timeForConsumer * 10));
 			table2.setWaitTime((timeForConsumer * 10));
 			table1.start();
@@ -121,10 +121,10 @@ public class Restaurant {
 		daysToSimulate = new ArrayList<>();
 		int auxHours = 0;
 		int auxDay = 1;
-		List<Double> hours = generateUniformDistribution(11, 2, 7, 24, 100, MIN_HOURS_PER_DAY, MAX_HOURS_PER_DAY);
-		List<Double> totalOfConsumers = generateUniformDistribution(11, 2, 7, 32, 100, MIN_CONSUMERS_PER_DAY, MAX_CONSUMERS_PER_DAY);
+		List<Double> hours = generateUniformDistribution(11, 2, 7, 24, 100, MIN_HOURS_DAY, MAX_HOURS_DAY);
+		List<Double> totalOfConsumers = generateUniformDistribution(11, 2, 7, 32, 100, MIN_CLIENTS_DAY, MAX_CLIENTS_DAY);
 		while (auxHours < hoursToSimulate) {
-			daysToSimulate.add(new JobDay(auxDay, (int) (Math.round(hours.get(auxDay))), (int) (Math.round(totalOfConsumers.get(auxDay)))));
+			daysToSimulate.add(new Day(auxDay, (int) (Math.round(hours.get(auxDay))), (int) (Math.round(totalOfConsumers.get(auxDay)))));
 			auxHours += (int) (Math.round(hours.get(auxDay)));
 			auxDay++;
 		}
@@ -140,11 +140,11 @@ public class Restaurant {
 		return hours;
 	}
 
-	public List<JobDay> getDays() {
+	public List<Day> getDays() {
 		return daysToSimulate;
 	}
 
-	public void setDays(List<JobDay> days) {
+	public void setDays(List<Day> days) {
 		this.daysToSimulate = days;
 	}
 
@@ -156,11 +156,11 @@ public class Restaurant {
 		this.listOfPlates = plates;
 	}
 
-	public List<Comsumo> getConsumptions() {
-		return consumptions;
+	public List<Calification> getConsumptions() {
+		return calificationList;
 	}
 
-	public void setConsumptions(List<Comsumo> consumptions) {
-		this.consumptions = consumptions;
+	public void setConsumptions(List<Calification> consumptions) {
+		this.calificationList = consumptions;
 	}
 }

@@ -2,7 +2,7 @@ package uptc.com.entities;
 
 public class Calification {
 
-    private int idConsumption;
+    private int id;
     private int score;
     private Product product;
 
@@ -10,17 +10,17 @@ public class Calification {
     }
 
     public Calification(int id, int score, Product product) {
-        this.idConsumption = id;
+        this.id = id;
         this.score = score;
         this.product = product;
     }
    
     public int getIdConsumption() {
-		return idConsumption;
+		return id;
 	}
 
 	public void setIdConsumption(int idConsumption) {
-		this.idConsumption = idConsumption;
+		this.id = idConsumption;
 	}
 
 	public int getScore() {
@@ -42,7 +42,7 @@ public class Calification {
 	@Override
     public String toString() {
         return "Consumption{" +
-                "id=" + idConsumption +
+                "id=" + id +
                 ", rating=" + score +
                 ", product=" + product +
                 '}';
