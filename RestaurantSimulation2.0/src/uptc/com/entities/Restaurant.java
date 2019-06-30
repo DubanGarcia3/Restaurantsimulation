@@ -1,23 +1,22 @@
 package uptc.com.entities;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import persistence.FileManager;
-
+import model.LinearCongruency;
+import model.Pruebas;
+import model.UniformDistribution;
 
 public class Restaurant {
 
-	public static final int MIN_CLIENTS_DAY = 200;
-	public static final int MAX_CLIENTS_DAY = 300;
-	public static final int MIN_HOURS_DAY = 10;
-	public static final int MAX_HOURS_DAY = 12;
+	public static final int MIN_CONSUMERS_PER_DAY = 73;
+	public static final int MAX_CONSUMERS_PER_DAY = 103;
+	public static final int MIN_HOURS_PER_DAY = 10;
+	public static final int MAX_HOURS_PER_DAY = 12;
 
 	private List<Day> daysToSimulate;
-	private List<Plate> listPlates;
-	private List<Calification> calificationList = new ArrayList<>();
-	private List<String> listData = new ArrayList<String>();
+	private List<Plate> listOfPlates;
+	private List<Calification> consumptions = new ArrayList<>();
 
 	private static Restaurant restaurant = new Restaurant();
 
@@ -41,7 +40,7 @@ public class Restaurant {
 		double sumOfRatingsPlate1 = 0, sumOfRatingsPlate2 = 0, sumOfRatingPlate3 = 0, sumOfRatingPlate4 = 0;
 		int totalNumberOfRatingsPlate1 = 0, totalNumberOfRatingsPlate2 = 0, totalNumberOfRatingsPlate3 = 0,
 				totalNumberOfRatingsPlate4 = 0;
-		for (Calification consumption : calificationList) {
+		for (Calification consumption : consumptions) {
 			try {
 			switch (consumption.getProduct().getIdProduct()) {
 			case 0:
@@ -84,15 +83,15 @@ public class Restaurant {
 	}
 	
 	public void addConsumation(Calification consumption) {
-		calificationList.add(consumption);
+		consumptions.add(consumption);
 	}
 
 	private void addPlates() {
-		listPlates = new ArrayList<>();
-		listPlates.add(new Plate(0, "Bandeja Paisa", Math.random()));
-		listPlates.add(new Plate(2, "Paella a la Valenciana", Math.random()));
-		listPlates.add(new Plate(3, "Arroz con Pollo", Math.random()));
-		listPlates.add(new Plate(1, "Cuchuco de Trigo con Espinazo", Math.random()));
+		listOfPlates = new ArrayList<>();
+		listOfPlates.add(new Plate(0, "Bandeja Paisa", Math.random()));
+		listOfPlates.add(new Plate(2, "Paella a la Valenciana", Math.random()));
+		listOfPlates.add(new Plate(3, "Arroz con Pollo", Math.random()));
+		listOfPlates.add(new Plate(1, "Cuchuco de Trigo con Espinazo", Math.random()));
 	}
 
 	private void startSimulation() {
@@ -104,12 +103,12 @@ public class Restaurant {
 
 		for (Day day : daysToSimulate) {
 			System.out.println("Inicio Dia " + day.getId() + "");
-			System.out.println("horas" + day.getJobHours());
-			System.out.println("clientes" + day.getClients());
-			table1 = new ManagerRestaurant(0, "Mesa 1 ", day.getClients() / 2);
-			table2 = new ManagerRestaurant(0, "Mesa 2 ", (int) Math.ceil(day.getClients() / 2));
+			System.out.println("horas" + day.getWorkingHours());
+			System.out.println("clientes" + day.getTotalConsumers());
+			table1 = new ManagerRestaurant(0, "Mesa 1 ", day.getTotalConsumers() / 2);
+			table2 = new ManagerRestaurant(0, "Mesa 2 ", (int) Math.ceil(day.getTotalConsumers() / 2));
 
-			timeForConsumer = (day.getClients() / 2) / day.getJobHours();
+			timeForConsumer = (day.getTotalConsumers() / 2) / day.getWorkingHours();
 			table1.setWaitTime((timeForConsumer * 10));
 			table2.setWaitTime((timeForConsumer * 10));
 			table1.start();
@@ -121,12 +120,14 @@ public class Restaurant {
 		generateFinalReport();
 	}
 
+	
+
 	private void generateDays(int hoursToSimulate) {
 		daysToSimulate = new ArrayList<>();
 		int auxHours = 0;
 		int auxDay = 1;
-		List<Double> hours = generateUniformDistribution(11, 2, 7, 24, 100, MIN_HOURS_DAY, MAX_HOURS_DAY);
-		List<Double> totalOfConsumers = generateUniformDistribution(11, 2, 7, 32, 100, MIN_CLIENTS_DAY, MAX_CLIENTS_DAY);
+		List<Double> hours = generateUniformDistribution(11, 2, 7, 24, 100, MIN_HOURS_PER_DAY, MAX_HOURS_PER_DAY);
+		List<Double> totalOfConsumers = generateUniformDistribution(11, 2, 7, 32, 100, MIN_CONSUMERS_PER_DAY, MAX_CONSUMERS_PER_DAY);
 		while (auxHours < hoursToSimulate) {
 			daysToSimulate.add(new Day(auxDay, (int) (Math.round(hours.get(auxDay))), (int) (Math.round(totalOfConsumers.get(auxDay)))));
 			auxHours += (int) (Math.round(hours.get(auxDay)));
@@ -134,36 +135,14 @@ public class Restaurant {
 		}
 	}
 
-//	private ArrayList<Double> generateUniformDistribution(double x0, int k, int c, int g, int quantity, int min, int max) {		
-//		ArrayList<Double> pseudoNumbers = model.LinearCongruency.generateNumbers(x0, k, c, g, quantity);
-//		ArrayList<Double> hours = model.UniformDistribution.generateDistribution(pseudoNumbers, min, max);
-//		while (!(model.Pruebas.pruebaMedias(0.95, pseudoNumbers) && model.Pruebas.pruebaVarianza(pseudoNumbers) && model.Pruebas.pruebaKS(pseudoNumbers))) {
-//			pseudoNumbers = model.LinearCongruency.generateNumbers(x0, k, c, g, quantity);
-//			hours = model.UniformDistribution.generateDistribution(pseudoNumbers, min, max);
-//		}
-//		return hours;
-//	}
-
-	public void manageFile() {
-		try {
-			List<String> file = FileManager.readFileHour();
-			for (int i = 0; i < file.size(); i++) {
-				listData.add(createPlayer(FileManager.splitLine(file.get(i), ",")));
-			}
-		} catch (IOException e) {
-			System.out.println(e);
-		}
-	}
-
-	public String createPlayer(String []in) {
-		return (in[0]);
-	}
-	
 	private ArrayList<Double> generateUniformDistribution(double x0, int k, int c, int g, int quantity, int min, int max) {		
-		ArrayList<Double> hours = new ArrayList<Double>();
-		for (int i = 0; i < listData.size(); i++) {
-			hours.add(Double.parseDouble(listData.get(i)));
+		ArrayList<Double> pseudoNumbers = LinearCongruency.generateNumbers(x0, k, c, g, quantity);
+		ArrayList<Double> hours = UniformDistribution.generateDistribution(pseudoNumbers, min, max);
+		while (!(Pruebas.pruebaMedias(0.95, pseudoNumbers) && Pruebas.pruebaVarianza(pseudoNumbers) && Pruebas.pruebaKS(pseudoNumbers))) {
+			pseudoNumbers = LinearCongruency.generateNumbers(x0, k, c, g, quantity);
+			hours = UniformDistribution.generateDistribution(pseudoNumbers, min, max);
 		}
+
 		return hours;
 	}
 
@@ -176,18 +155,18 @@ public class Restaurant {
 	}
 
 	public List<Plate> getPlates() {
-		return listPlates;
+		return listOfPlates;
 	}
 
 	public void setPlates(List<Plate> plates) {
-		this.listPlates = plates;
+		this.listOfPlates = plates;
 	}
 
 	public List<Calification> getConsumptions() {
-		return calificationList;
+		return consumptions;
 	}
 
 	public void setConsumptions(List<Calification> consumptions) {
-		this.calificationList = consumptions;
+		this.consumptions = consumptions;
 	}
 }
