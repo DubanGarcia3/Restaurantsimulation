@@ -2,20 +2,20 @@ package uptc.com.entities;
 
 public class Calification {
 
-    private int id;
-    private int score;
-    private Plate product;
+	private int id;
+	private int score;
+	private Plate plate;
 
-    public Calification() {
-    }
+	public Calification() {
+	}
 
-    public Calification(int id, int score, Plate product) {
-        this.id = id;
-        this.score = score;
-        this.product = product;
-    }
-   
-    public int getIdConsumption() {
+	public Calification(int id, int score, Plate plate) {
+		this.id = id;
+		this.score = score;
+		this.plate = plate;
+	}
+
+	public int getIdConsumption() {
 		return id;
 	}
 
@@ -31,20 +31,16 @@ public class Calification {
 		this.score = score;
 	}
 
-	public Plate getProduct() {
-		return product;
+	public Plate getPlate() {
+		return plate;
 	}
 
-	public void setProduct(Plate product) {
-		this.product = product;
+	public void setPlate(Plate plate) {
+		this.plate = plate;
 	}
 
 	@Override
-    public String toString() {
-        return "Consumption{" +
-                "id=" + id +
-                ", rating=" + score +
-                ", product=" + product +
-                '}';
-    }
+	public String toString() {
+		return "Calification{" +"id=" + id +", rating=" + score +", product=" + plate +'}';
+	}
 }

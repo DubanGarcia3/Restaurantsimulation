@@ -9,7 +9,7 @@ public class Restaurant {
 
 	private List<Day> daysToSimulate;
 	private List<Plate> listOfPlates;
-	private List<Calification> consumptions = new ArrayList<>();
+	private List<Calification> califications = new ArrayList<>();
 	private List<String> listData = new ArrayList<String>();
 	private List<String> listDataClients = new ArrayList<String>();
 
@@ -36,34 +36,34 @@ public class Restaurant {
 		double sumOfRatingsPlate1 = 0, sumOfRatingsPlate2 = 0, sumOfRatingPlate3 = 0, sumOfRatingPlate4 = 0;
 		int totalNumberOfRatingsPlate1 = 0, totalNumberOfRatingsPlate2 = 0, totalNumberOfRatingsPlate3 = 0,
 				totalNumberOfRatingsPlate4 = 0;
-		for (Calification consumption : consumptions) {
+		for (Calification calification : califications) {
 			try {
-			switch (consumption.getProduct().getIdProduct()) {
+			switch (calification.getPlate().getIdProduct()) {
 			case 0:
 				totalPlate1++;
-				if (consumption.getScore() != -1) {
-					sumOfRatingsPlate1 += consumption.getScore();
+				if (calification.getScore() != -1) {
+					sumOfRatingsPlate1 += calification.getScore();
 					totalNumberOfRatingsPlate1++;
 				}
 				break;
 			case 1:
 				totalPlate2++;
-				if (consumption.getScore() != -1) {
-					sumOfRatingsPlate2 += consumption.getScore();
+				if (calification.getScore() != -1) {
+					sumOfRatingsPlate2 += calification.getScore();
 					totalNumberOfRatingsPlate2++;
 				}
 				break;
 			case 2:
 				totalPlate3++;
-				if (consumption.getScore() != -1) {
-					sumOfRatingPlate3 += consumption.getScore();
+				if (calification.getScore() != -1) {
+					sumOfRatingPlate3 += calification.getScore();
 					totalNumberOfRatingsPlate3++;
 				}
 				break;
 			case 3:
 				totalPlate4++;
-				if (consumption.getScore() != -1) {
-					sumOfRatingPlate4 += consumption.getScore();
+				if (calification.getScore() != -1) {
+					sumOfRatingPlate4 += calification.getScore();
 					totalNumberOfRatingsPlate4++;
 				}
 				break;
@@ -78,8 +78,8 @@ public class Restaurant {
 		System.out.println("Cuchuco de Trigo con Espinazo : " + totalPlate2 + "\t Calificación: " + sumOfRatingsPlate2 / totalNumberOfRatingsPlate2);
 	}
 	
-	public void addConsumation(Calification consumption) {
-		consumptions.add(consumption);
+	public void addCalification(Calification calification) {
+		califications.add(calification);
 	}
 
 	private void addPlates() {
@@ -91,27 +91,20 @@ public class Restaurant {
 	}
 
 	private void startSimulation() {
-		Table table1 = null;
-		Table table2 = null;
-		Table table3 = null;
-		Table table4 = null;
-		Table table5 = null;
-		int timeForConsumer = 0;
-		System.out.println("Dias-->" + daysToSimulate.size());
+		System.out.println("Total dias de trabajo simulados: " + daysToSimulate.size());
 		System.out.println();
 
 		for (Day day : daysToSimulate) {
 			System.out.println("Inicio Dia " + day.getId() + "");
 			System.out.println("horas" + day.getWorkingHours());
 			System.out.println("clientes" + day.getTotalConsumers());
-			table1 = new Table(0, "Mesa 1 ", day.getTotalConsumers() / 2);
+			Table	table1 = new Table(0, "Mesa 1 ", day.getTotalConsumers() / 2);
 			System.out.println("customesrs: "+day.getTotalConsumers());
-			table2 = new Table(0, "Mesa 2 ", (int) Math.ceil(day.getTotalConsumers() / 2));
-			table3 = new Table(0, "Mesa 3 ", (int) Math.ceil(day.getTotalConsumers() / 2));
-			table4 = new Table(0, "Mesa 4 ", (int) Math.ceil(day.getTotalConsumers() / 2));
-			table5 = new Table(0, "Mesa 5 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			Table	table2 = new Table(0, "Mesa 2 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			Table	table3 = new Table(0, "Mesa 3 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			Table	table4 = new Table(0, "Mesa 4 ", (int) Math.ceil(day.getTotalConsumers() / 2));
+			Table	table5 = new Table(0, "Mesa 5 ", (int) Math.ceil(day.getTotalConsumers() / 2));
 
-			timeForConsumer = (day.getTotalConsumers() / 2) / day.getWorkingHours();
 			table1.setWaitTime((1000));
 			table2.setWaitTime((1000));
 			table3.setWaitTime((1000));
@@ -122,8 +115,6 @@ public class Restaurant {
 			table3.start();
 			table4.start();
 			table5.start();
-			while (table1.isAlive() || table2.isAlive() || table5.isAlive() || table4.isAlive() || table3.isAlive()) {
-			}
 			System.out.println("Fin dia" + day.getId() );
 		}
 		generateFinalReport();
@@ -201,10 +192,10 @@ public class Restaurant {
 	}
 
 	public List<Calification> getConsumptions() {
-		return consumptions;
+		return califications;
 	}
 
-	public void setConsumptions(List<Calification> consumptions) {
-		this.consumptions = consumptions;
+	public void setConsumptions(List<Calification> califications) {
+		this.califications = califications;
 	}
 }

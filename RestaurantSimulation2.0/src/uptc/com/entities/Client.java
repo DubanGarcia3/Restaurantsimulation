@@ -13,6 +13,11 @@ public class Client extends Thread{
 	}
 	
 	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", time=" + time + "]";
+	}
+
+	@Override
 	public void run() {
 		super.run();
 		try {
