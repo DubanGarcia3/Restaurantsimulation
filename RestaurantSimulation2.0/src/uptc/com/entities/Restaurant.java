@@ -1,7 +1,10 @@
 package uptc.com.entities;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import persistence.FileManager;
 
 
 public class Restaurant {
@@ -14,6 +17,7 @@ public class Restaurant {
 	private List<Day> daysToSimulate;
 	private List<Product> listOfPlates;
 	private List<Calification> calificationList = new ArrayList<>();
+	private List<String> listData = new ArrayList<String>();
 
 	private static Restaurant restaurant = new Restaurant();
 
@@ -130,12 +134,35 @@ public class Restaurant {
 		}
 	}
 
+//	private ArrayList<Double> generateUniformDistribution(double x0, int k, int c, int g, int quantity, int min, int max) {		
+//		ArrayList<Double> pseudoNumbers = model.LinearCongruency.generateNumbers(x0, k, c, g, quantity);
+//		ArrayList<Double> hours = model.UniformDistribution.generateDistribution(pseudoNumbers, min, max);
+//		while (!(model.Pruebas.pruebaMedias(0.95, pseudoNumbers) && model.Pruebas.pruebaVarianza(pseudoNumbers) && model.Pruebas.pruebaKS(pseudoNumbers))) {
+//			pseudoNumbers = model.LinearCongruency.generateNumbers(x0, k, c, g, quantity);
+//			hours = model.UniformDistribution.generateDistribution(pseudoNumbers, min, max);
+//		}
+//		return hours;
+//	}
+
+	public void manageFile() {
+		try {
+			List<String> file = FileManager.readFileHour();
+			for (int i = 0; i < file.size(); i++) {
+				listData.add(createPlayer(FileManager.splitLine(file.get(i), ",")));
+			}
+		} catch (IOException e) {
+			System.out.println(e);
+		}
+	}
+
+	public String createPlayer(String []in) {
+		return (in[0]);
+	}
+	
 	private ArrayList<Double> generateUniformDistribution(double x0, int k, int c, int g, int quantity, int min, int max) {		
-		ArrayList<Double> pseudoNumbers = model.LinearCongruency.generateNumbers(x0, k, c, g, quantity);
-		ArrayList<Double> hours = model.UniformDistribution.generateDistribution(pseudoNumbers, min, max);
-		while (!(model.Pruebas.pruebaMedias(0.95, pseudoNumbers) && model.Pruebas.pruebaVarianza(pseudoNumbers) && model.Pruebas.pruebaKS(pseudoNumbers))) {
-			pseudoNumbers = model.LinearCongruency.generateNumbers(x0, k, c, g, quantity);
-			hours = model.UniformDistribution.generateDistribution(pseudoNumbers, min, max);
+		ArrayList<Double> hours = new ArrayList<Double>();
+		for (int i = 0; i < listData.size(); i++) {
+			hours.add(Double.parseDouble(listData.get(i)));
 		}
 		return hours;
 	}
