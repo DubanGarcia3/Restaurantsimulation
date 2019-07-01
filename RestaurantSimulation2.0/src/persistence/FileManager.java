@@ -25,6 +25,12 @@ public class FileManager {
 		return listLines;		
 	}
 	
+	public static List<String> readFileTimeWaiter() throws IOException{
+		List<String> listLines;
+		listLines = Files.readAllLines(Paths.get("src/data/meseros.csv"));
+		return listLines;		
+	}
+	
 	public static String[] splitLine(String line, String separator){
 		return line.split(separator);
 	}

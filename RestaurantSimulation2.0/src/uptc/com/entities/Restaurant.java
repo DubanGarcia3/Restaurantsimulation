@@ -13,6 +13,7 @@ public class Restaurant {
 	private List<String> listDataHours = new ArrayList<String>();
 	private List<String> listDataClients = new ArrayList<String>();
 	private List<String> listTimes = new ArrayList<String>();
+	private List<String> listTimesWaiters = new ArrayList<String>();
 	private static Restaurant restaurant = new Restaurant();
 
 	public static Restaurant getInstance() {
@@ -124,14 +125,26 @@ public class Restaurant {
 				listDataClients.add(numberOfClient(FileManager.splitLine(fileTwo.get(i), ",")));
 			}
 
-			List<String> fileThree = FileManager.readFileClients();
+			List<String> fileThree = FileManager.readFileTimeToEat();
 			for (int i = 0; i < fileThree.size(); i++) {
-				listTimes.add(numberOfClient(FileManager.splitLine(fileThree.get(i), ",")));
+				listTimes.add(timeToEat(FileManager.splitLine(fileThree.get(i), ",")));
+			}
+			List<String> fileFour = FileManager.readFileTimeWaiter();
+			for (int i = 0; i < fileFour.size(); i++) {
+				listTimesWaiters.add(getListWaiters(FileManager.splitLine(fileThree.get(i), ",")));
 			}
 
 		} catch (IOException e) {
 			System.out.println(e);
 		}
+	}
+	
+	public String getListWaiters(String []in) {
+		return (in[0]);
+	}
+	
+	public String timeToEat(String []in) {
+		return (in[0]);
 	}
 
 	public String createHour(String []in) {
@@ -213,5 +226,13 @@ public class Restaurant {
 
 	public void setListTimes(List<String> listTimes) {
 		this.listTimes = listTimes;
+	}
+
+	public List<String> getListTimesWaiters() {
+		return listTimesWaiters;
+	}
+
+	public void setListTimesWaiters(List<String> listTimesWaiters) {
+		this.listTimesWaiters = listTimesWaiters;
 	}
 }

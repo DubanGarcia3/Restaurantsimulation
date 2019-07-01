@@ -41,10 +41,10 @@ public class Table extends Thread {
 				calification.setPlate(Restaurant.getInstance().getPlates().get(randomPlateOne));
 				int countOfClients = listClients.size();
 				listClients.removeAll(listClients);
-				waiter2.setTimeToServe(100);
+				waiter2.setTimeToServe(Integer.parseInt(Restaurant.getInstance().getListTimesWaiters().get((int) (Math.random() * 2999) + 1)));
 				this.setWaiter(waiter2);
 				if(waiter2.isService()) {
-					waiter1.setTimeToServe(100);
+					waiter1.setTimeToServe(Integer.parseInt(Restaurant.getInstance().getListTimesWaiters().get((int) (Math.random() * 2999) + 1)));
 					this.setWaiter(waiter1);
 				}
 				waiter2.run();
