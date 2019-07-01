@@ -2,13 +2,13 @@ package uptc.com.entities;
 
 public class Day {
 	private int id;
-    private int workingHours;
-    private int totalCustomers;
+    private int workedHours;
+    private int totalClients;
 
-    public Day(int id, int workingHours, int totalCustomers) {
+    public Day(int id, int workedHours, int totalClients) {
         this.id = id;
-        this.workingHours = workingHours;
-        this.totalCustomers = totalCustomers;
+        this.workedHours = workedHours;
+        this.totalClients = totalClients;
     }
 
     public int getId() {
@@ -19,19 +19,19 @@ public class Day {
         this.id = id;
     }
 
-    public int getWorkingHours() {
-        return workingHours;
+    public int getWorkedHours() {
+        return workedHours;
     }
 
-    public void setWorkingHours(int workingHours) {
-        this.workingHours = workingHours;
+    public void setWorkedHours(int workedHours) {
+        this.workedHours = workedHours;
     }
 
-    public int getTotalConsumers() {
-        return totalCustomers;
+    public int getTotalClients() {
+        return totalClients;
     }
 
-    public void setTotalConsumers(int totalConsumers) {
-        this.totalCustomers = totalConsumers;
+    public void setTotalClients(int totalClients) {
+        this.totalClients = totalClients;
     }
 }

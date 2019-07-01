@@ -50,20 +50,20 @@ public class Table extends Thread {
 				waiter2.run();
 				Thread.sleep(this.getTime()+100);
 				calification.setScore((int) (Math.random() * (5 - 0) + 1) + 0);
-				System.out.println("Calificacion de la mesa: " + tableName + "Plato : " + calification.getPlate().getProductName() + " Puntaje: " + calification.getScore());
+				System.out.println("Calificacion de la mesa: " + tableName + "Plato : " + calification.getPlate().getPlateName() + " Puntaje: " + calification.getScore());
 				
 				if(countOfClients == 2) {
 					Calification calificationTwo = new Calification();
 					calificationTwo.setPlate(Restaurant.getInstance().getPlates().get(randomPlateTwo));
 					calificationTwo.setScore((int) (Math.random() * (5 - 0) + 1) + 0);
-					System.out.println("Calificacion de la mesa: " + tableName + "Plato : " + calificationTwo.getPlate().getProductName() + " Puntaje: " + calificationTwo.getScore());
+					System.out.println("Calificacion de la mesa: " + tableName + "Plato : " + calificationTwo.getPlate().getPlateName() + " Puntaje: " + calificationTwo.getScore());
 					Restaurant.getInstance().addCalification(calificationTwo);
 					
 				} else if (countOfClients == 3) {
 					Calification calificationThree = new Calification();
 					calificationThree.setPlate(Restaurant.getInstance().getPlates().get(randomPlateThree));
 					calificationThree.setScore((int) (Math.random() * (5 - 0) + 1) + 0);
-					System.out.println("Calificacion de la mesa: " + tableName + "Plato : " + calificationThree.getPlate().getProductName() + " Puntaje: " + calificationThree.getScore());
+					System.out.println("Calificacion de la mesa: " + tableName + "Plato : " + calificationThree.getPlate().getPlateName() + " Puntaje: " + calificationThree.getScore());
 					Restaurant.getInstance().addCalification(calificationThree);
 				}
 				freeTable = false;

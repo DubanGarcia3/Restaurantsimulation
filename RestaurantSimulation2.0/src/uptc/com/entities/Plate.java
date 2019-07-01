@@ -1,46 +1,46 @@
 package uptc.com.entities;
 
 public class Plate {
-    private int idProduct;
-    private String productName;
-    private double ratingProbability;
+    private int idPlate;
+    private String plateName;
+    private double probability;
 
-    public Plate(int id, String name, double ratingProbability) {
-        this.idProduct = id;
-        this.productName = name;
-        this.ratingProbability = ratingProbability;
+    public Plate(int id, String namePlate, double probability) {
+        this.idPlate = id;
+        this.plateName = namePlate;
+        this.probability = probability;
     }
 
-    public int getIdProduct() {
-        return idProduct;
+    public int getIdPlate() {
+        return idPlate;
     }
 
-    public void setIdProduct(int id) {
-        this.idProduct = id;
+    public void setIdPlate(int id) {
+        this.idPlate = id;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getPlateName() {
+        return plateName;
     }
 
-    public void setName(String productName) {
-        this.productName = productName;
+    public void setName(String plateName) {
+        this.plateName = plateName;
     }
 
     public double getRatingProbability() {
-        return ratingProbability;
+        return probability;
     }
 
-    public void setRatingProbability(double ratingProbability) {
-        this.ratingProbability = ratingProbability;
+    public void setRatingProbability(double probability) {
+        this.probability = probability;
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                "id=" + idProduct +
-                ", name='" + productName + '\'' +
-                ", ratingProbability=" + ratingProbability +
+                "id=" + idPlate +
+                ", name='" + plateName + '\'' +
+                ", ratingProbability=" + probability +
                 '}';
     }
 }

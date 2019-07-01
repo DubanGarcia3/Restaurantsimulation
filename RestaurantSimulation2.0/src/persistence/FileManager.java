@@ -15,7 +15,7 @@ public class FileManager {
 	
 	public static List<String> readFileClients() throws IOException{
 		List<String> listLines;
-		listLines = Files.readAllLines(Paths.get("src/data/ClientsToSimulation.csv"));
+		listLines = Files.readAllLines(Paths.get("src/data/clientsToSimulation.csv"));
 		return listLines;		
 	}
 	
