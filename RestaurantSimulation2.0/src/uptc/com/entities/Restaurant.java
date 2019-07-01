@@ -13,7 +13,6 @@ public class Restaurant {
 	private List<String> listData = new ArrayList<String>();
 	private List<String> listDataClients = new ArrayList<String>();
 	private List<String> listTimes = new ArrayList<String>();
-
 	private static Restaurant restaurant = new Restaurant();
 
 	public static Restaurant getInstance() {
@@ -28,10 +27,9 @@ public class Restaurant {
 		addPlates();
 		generateDays(hoursToSimulate);
 		startSimulation();
-		
 	}
 
-	private void generateFinalReport() {
+	private void generateReport() {
 		System.out.println();
 		int totalPlate1 = 0, totalPlate2 = 0, totalPlate3 = 0, totalPlate4 = 0;
 		double sumOfRatingsPlate1 = 0, sumOfRatingsPlate2 = 0, sumOfRatingPlate3 = 0, sumOfRatingPlate4 = 0;
@@ -94,7 +92,6 @@ public class Restaurant {
 	private void startSimulation() {
 		System.out.println("Dias simulados: " + daysToSimulate.size());
 		System.out.println();
-
 		for (Day day : daysToSimulate) {
 			System.out.println("Dia #: " + day.getId() + "");
 			System.out.println("Horas trabajadas" + day.getWorkingHours());
@@ -113,7 +110,7 @@ public class Restaurant {
 			while (table1.isAlive() || table2.isAlive() || table5.isAlive() || table4.isAlive() || table3.isAlive()) {
 			}
 		}
-		generateFinalReport();
+		generateReport();
 	}
 
 	private void generateDays(int hoursToSimulate) {

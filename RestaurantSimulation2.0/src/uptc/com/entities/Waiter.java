@@ -3,12 +3,10 @@ package uptc.com.entities;
 public class Waiter extends Thread {
 	
 	private int id;
-	public static int ID_BASE = 1;
 	private int timeToServe;
 	private boolean service;
 	
 	public Waiter(int id, int timeToServe) {
-		id = ID_BASE++;
 		this.id = id;
 		this.timeToServe = timeToServe;
 	}
@@ -19,7 +17,7 @@ public class Waiter extends Thread {
 		try {
 			service = true;
 			while (service) {
-				System.out.println("El mesero está sirviendo");
+				System.out.println("El mesero #"+ id+" está sirviendo");
 				Thread.sleep(timeToServe);
 				break;
 			}
