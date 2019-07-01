@@ -159,7 +159,6 @@ public class Restaurant {
 		return hours;
 	}
 
-
 	public String numberOfClient(String []in) {
 		return (in[0]);
 	}
