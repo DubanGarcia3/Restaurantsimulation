@@ -17,7 +17,7 @@ public class Waiter extends Thread {
 		try {
 			service = true;
 			while (service) {
-				System.out.println("El mesero #"+ id+" está sirviendo");
+				System.out.println("El mesero #"+ id +" está sirviendo");
 				Thread.sleep(timeToServe);
 				break;
 			}
