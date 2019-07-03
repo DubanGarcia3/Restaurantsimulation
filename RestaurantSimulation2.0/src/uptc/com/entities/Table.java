@@ -23,6 +23,8 @@ public class Table extends Thread {
 	public void run() {
 		Waiter waiter1 = new Waiter(1, 0);
 		Waiter waiter2 = new Waiter(2, 0);
+		waiter1.setService(false);
+		waiter2.setService(false);
 		super.run();
 		try {
 			freeTable = true;
@@ -41,13 +43,22 @@ public class Table extends Thread {
 				calification.setPlate(Restaurant.getInstance().getPlates().get(randomPlateOne));
 				int countOfClients = listClients.size();
 				listClients.removeAll(listClients);
-				waiter2.setTimeToServe(Integer.parseInt(Restaurant.getInstance().getListTimesWaiters().get((int) (Math.random() * 2999) + 1)));
-				this.setWaiter(waiter2);
-				if(waiter2.isService()) {
+				//clientes 
+				waiter1.setTimeToServe(Integer.parseInt(Restaurant.getInstance().getListTimesWaiters().get((int) (Math.random() * 2999) + 1)));
+				if(!waiter2.isService()) {  
 					waiter1.setTimeToServe(Integer.parseInt(Restaurant.getInstance().getListTimesWaiters().get((int) (Math.random() * 2999) + 1)));
 					this.setWaiter(waiter1);
+					waiter1.setService(true);
+					waiter1.run();
+					waiter1.setService(false);
 				}
-				waiter2.run();
+				if(!waiter1.isService()) {
+					waiter2.setTimeToServe(Integer.parseInt(Restaurant.getInstance().getListTimesWaiters().get((int) (Math.random() * 2999) + 1)));
+					waiter2.setService(true);
+					this.setWaiter(waiter2);
+					waiter2.run();
+					waiter2.setService(false);
+				}
 				Thread.sleep(this.getTime()+100);
 				calification.setScore((int) (Math.random() * (5 - 0) + 1) + 0);
 				System.out.println("Calificacion de la mesa: " + tableName + "Plato : " + calification.getPlate().getPlateName() + " Puntaje: " + calification.getScore());
