@@ -60,20 +60,20 @@ public class Table extends Thread {
 				}
 				Thread.sleep(this.getTime()+100);
 				calification.setScore((int) (Math.random() * (5 - 0) + 1) + 0);
-				System.out.println("Calificacion de la mesa: " + tableName + "Plato : " + calification.getPlate().getPlateName() + " Puntaje: " + calification.getScore());
+				System.out.println("Calificacion en mesa" + tableName + ", Plato : " + calification.getPlate().getPlateName() + " con " + calification.getScore() + " puntos.");
 				
 				if(countOfClients == 2) {
 					Calification calificationTwo = new Calification();
 					calificationTwo.setPlate(Restaurant.getInstance().getPlates().get(randomPlateTwo));
 					calificationTwo.setScore((int) (Math.random() * (5 - 0) + 1) + 0);
-					System.out.println("Calificacion de la mesa: " + tableName + "Plato : " + calificationTwo.getPlate().getPlateName() + " Puntaje: " + calificationTwo.getScore());
+					System.out.println("Calificacion en mesa: " + tableName + ", Plato : " + calification.getPlate().getPlateName() + " con " + calification.getScore() + " puntos.");
 					Restaurant.getInstance().addCalification(calificationTwo);
 					
 				} else if (countOfClients == 3) {
 					Calification calificationThree = new Calification();
 					calificationThree.setPlate(Restaurant.getInstance().getPlates().get(randomPlateThree));
 					calificationThree.setScore((int) (Math.random() * (5 - 0) + 1) + 0);
-					System.out.println("Calificacion de la mesa: " + tableName + "Plato : " + calificationThree.getPlate().getPlateName() + " Puntaje: " + calificationThree.getScore());
+					System.out.println("Calificacion en mesa " + tableName + ", Plato : " + calification.getPlate().getPlateName() + " con " + calification.getScore() + " puntos.");
 					Restaurant.getInstance().addCalification(calificationThree);
 				}
 				freeTable = false;
@@ -89,7 +89,7 @@ public class Table extends Thread {
 		for (int i = 0; i < (int)(Math.random()*2 + 1); i++) {
 			listClients.add(new Client(Integer.parseInt(Restaurant.getInstance().getListTimes().get((int) (Math.random() * 2000) + 1))));
 		}
-		System.out.println("Mesa # "+idTable+" Cantidad de clientes en la mesa: "+ listClients.size());
+		System.out.println("Mesa Numero: "+idTable+" con "+ listClients.size()+ " clientes");
 	}
 	
 	public int getTime() {

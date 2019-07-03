@@ -37,8 +37,8 @@ public class Plate {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + idPlate +
+        return "plato: " +
+                + idPlate +
                 ", name='" + plateName + '\'' +
                 ", ratingProbability=" + probability +
                 '}';

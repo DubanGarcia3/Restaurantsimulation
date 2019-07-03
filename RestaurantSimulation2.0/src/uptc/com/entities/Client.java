@@ -14,7 +14,7 @@ public class Client extends Thread{
 	
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", time=" + time + "]";
+		return "Cliente numero" + id + ", con tiempo " + time;
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class Client extends Thread{
 		try {
 			isEating = true;
 			while (isEating) {
-				System.out.println("comiendo");
+				System.out.println("comiendo...");
 				Thread.sleep(time);
 				break;
 			}

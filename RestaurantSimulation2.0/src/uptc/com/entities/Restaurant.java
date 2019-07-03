@@ -71,17 +71,17 @@ public class Restaurant {
 	private void addPlates() {
 		listOfPlates = new ArrayList<>();
 		listOfPlates.add(new Plate(0, "Bandeja Paisa", Math.random()));
-		listOfPlates.add(new Plate(2, "Paella a la Valenciana", Math.random()));
-		listOfPlates.add(new Plate(3, "Arroz con Pollo", Math.random()));
-		listOfPlates.add(new Plate(1, "Cuchuco de Trigo con Espinazo", Math.random()));
+		listOfPlates.add(new Plate(1, "Paella a la Valenciana", Math.random()));
+		listOfPlates.add(new Plate(2, "Arroz con Pollo", Math.random()));
+		listOfPlates.add(new Plate(3, "Cuchuco de Trigo con Espinazo", Math.random()));
 	}
 
 	private void startSimulation() {
 		System.out.println("Dias simulados: " + daysInSimulation.size());
 		System.out.println();
 		for (Day day : daysInSimulation) {
-			System.out.println("Dia #: " + day.getId() + "");
-			System.out.println("Horas trabajadas" + day.getWorkedHours());
+			System.out.println("Dia No: " + day.getId());
+			System.out.println("Horas trabajadas: " + day.getWorkedHours());
 			System.out.println("Clientes en el dia: " + day.getTotalClients());
 			Table tableOne = new Table("Mesa 1 ");
 			Table tableTwo = new Table("Mesa 2 ");
