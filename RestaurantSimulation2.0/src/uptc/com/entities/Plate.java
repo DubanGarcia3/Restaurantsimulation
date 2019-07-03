@@ -34,13 +34,4 @@ public class Plate {
     public void setRatingProbability(double probability) {
         this.probability = probability;
     }
-
-    @Override
-    public String toString() {
-        return "plato: " +
-                + idPlate +
-                ", name='" + plateName + '\'' +
-                ", ratingProbability=" + probability +
-                '}';
-    }
 }

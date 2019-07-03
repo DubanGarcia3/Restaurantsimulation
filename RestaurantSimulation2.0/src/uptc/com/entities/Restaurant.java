@@ -58,10 +58,28 @@ public class Restaurant {
 			}
 
 		}
+		
+		double  netWorthBandeja = (cantOfBandeja*18000)*0.25;
+		double  netWorthCuchuco = (cantOfCuchuco*12000)*0.25;
+		double 	netWorthValencia = (cantOfPaella*20000)*0.25;
+		double 	netWorthArroz = (cantOfArroz*17000)*0.25;
+		
 		System.out.println("Bandeja Paisa: " + cantOfBandeja + "\t Calificación: " + totalRatingBandeja / cantOfBandeja);
 		System.out.println("Cuchuco de Trigo con Espinazo : " + cantOfCuchuco + "\t Calificación: " + totalRatingCuchuco / cantOfCuchuco);
 		System.out.println("Paella a la Valenciana: " + cantOfPaella + "\t Calificación:  " + totalRatingPaella / cantOfPaella);
 		System.out.println("Arroz con Pollo: " + cantOfArroz + "\t Calificación:  " + totalRatingArroz / cantOfArroz);
+		System.out.println();
+		System.out.println("Bandeja: "+netWorthBandeja+ " Cuchuco: " + netWorthCuchuco + " Valencia: "+ netWorthValencia+ " Arroz: " + netWorthArroz);
+		if(netWorthBandeja > netWorthCuchuco && netWorthBandeja > netWorthValencia && netWorthBandeja > netWorthArroz ) {
+			System.out.println("El plato con mayor utilidad es la Bandeja Paisa con: "+ netWorthBandeja);
+		} else if (netWorthCuchuco >  netWorthValencia && netWorthCuchuco >  netWorthArroz ) {
+			System.out.println("El plato con mayor utilidad es el Cuchuco con: "+ netWorthCuchuco);
+		} else if (netWorthValencia > netWorthArroz) {
+			System.out.println("El plato con mayor utilidad es la Paella con: "+ netWorthValencia);
+		} else {
+			System.out.println("El plato con mayor utilidad es la Arroz con pollo con: "+ netWorthArroz);
+		}
+		System.out.println();
 	}
 
 	public void addCalification(Calification calification) {
